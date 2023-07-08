@@ -10,7 +10,7 @@ import { useData } from "../context/dataContext";
 
 export default function DetailsRestaurant() {
   const { id: paramId } = useParams();
-  const { restaurantsDataCopy } = useData();
+  const { restaurantsDataCopy, loggedInUserData } = useData();
   
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -43,17 +43,22 @@ export default function DetailsRestaurant() {
   return (
     <div>
       <div>
-        <header className="flex gap-2">
+      <header className="flex justify-between p-2 sticky top-0 bg-rose-500 text-white">
+        <p className="text-xl font-bold ">FOOD <span className="text-4xl">.</span></p>
+      <img title={loggedInUserData?.userName} src={loggedInUserData.profileAvatar} alt={loggedInUserData.userName}  className="w-12 hover:bg-sky-900 "/>
+      </header>
+      <section className="m-auto w-1/2">
+          <header className="flex gap-2">
           <NavLink to="/">
             <ArrowBackIcon />
           </NavLink>
           <h1 className="text-4xl">{name}</h1>
         </header>
-        <div className="flex flex-col">
+<div className="flex flex-col text-left text-gray-500 px-8">
           <p>{description}</p>
           <p className="flex gap-1">
             {menu.map((item) => (
-              <span className=" text-gray-500">{item.name}</span>
+              <span className=" ">{item.name}</span>
             ))}
           </p>
           <p>{address}</p>
@@ -61,6 +66,7 @@ export default function DetailsRestaurant() {
 
           <p>Average rating: {averageRating}</p>
         </div>
+     
         <button
          variant="contained" onClick={handleClick}
           className="bg-rose-500 text-lime-200 p-2"
@@ -80,9 +86,13 @@ export default function DetailsRestaurant() {
       >
         <ReviewForm restId={id} closefunction={handleClose} />
       </Popover>
-      </div>
+      </section>
       
-      <div>
+   
+         </div>
+     
+      
+      <div className="m-auto text-center">
         {ratings.map((item) => (
           <ReviewCard data={item} />
         ))}
