@@ -5,9 +5,9 @@ export default function Cuisines({ data }) {
   const { id, name, menu } = data;
 
   return (
-    <div>
+    <div className="w-screen text-left">
       <NavLink to={`/restaurant/${id}`}>
-        <h2 className="text-3xl">
+        <h2 className="text-3xl ">
           Dishes by {name} <ArrowForwardIcon />
         </h2>
       </NavLink>
