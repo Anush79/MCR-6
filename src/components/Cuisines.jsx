@@ -5,13 +5,8 @@ export default function Cuisines({ data }) {
   const {
     id,
     name,
-
-    address,
-    phone,
     menu,
-    ratings,
-    averageRating,
-    description,
+
   } = data;
 
   return (

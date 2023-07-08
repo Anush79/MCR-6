@@ -2,13 +2,14 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { NavLink, useParams } from "react-router-dom";
 import { useData } from "../context/dataContext";
 import ReviewCard from '../components/ReviewCard'
+import ReviewForm from '../components/ReviewForm'
 import { useState } from "react";
 export default function DetailsRestaurant() {
   const { id: paramId } = useParams();
-  const { restaurantsData } = useData();
+  const { restaurantsDataCopy } = useData();
   const [formOpen, setFormOpen] = useState(false)
 
-  const foundRestaurant = restaurantsData.find(
+  const foundRestaurant = restaurantsDataCopy.find(
     (item) => item.id === Number(paramId)
   );
   const {
@@ -44,6 +45,11 @@ export default function DetailsRestaurant() {
           <p>Average rating: {averageRating}</p>
         </div>
         <button onClick={()=>{setFormOpen(!formOpen)}} className="bg-rose-500 text-lime-200 p-2" >Add review</button>
+      </div>
+      <div>
+        {
+          formOpen && <ReviewForm restId={id}/>
+        }
       </div>
       <div>
         {

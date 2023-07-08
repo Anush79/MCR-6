@@ -8,7 +8,7 @@ export default function Landing() {
     const filteredData = selectedCuisineRestData(id);
     setCuisineDataToShow(filteredData)
   }
-  console.log(cuisineDataToShow)
+
   return (
     <main className="flex flex-col my-1 sm:mt-0">
       <h1 className="bg-rose-500 p-2 text-lime-200">Food Ordering App</h1>
@@ -19,7 +19,7 @@ export default function Landing() {
       }
       </div>
    <div className="flex flex-col">
-    {cuisineDataToShow.map(item=><Cuisines data={item}/>)
+    {cuisineDataToShow?.map(item=><Cuisines data={item}/>)
     }
    </div>
     </main>
