@@ -1,13 +1,31 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { NavLink, useParams } from "react-router-dom";
-import { useData } from "../context/dataContext";
-import ReviewCard from '../components/ReviewCard'
-import ReviewForm from '../components/ReviewForm'
+import Popover from '@mui/material/Popover';
+
 import { useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
+
+import ReviewCard from "../components/ReviewCard";
+import ReviewForm from "../components/ReviewForm";
+import { useData } from "../context/dataContext";
+
 export default function DetailsRestaurant() {
   const { id: paramId } = useParams();
   const { restaurantsDataCopy } = useData();
-  const [formOpen, setFormOpen] = useState(false)
+  
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
+
 
   const foundRestaurant = restaurantsDataCopy.find(
     (item) => item.id === Number(paramId)
@@ -15,7 +33,6 @@ export default function DetailsRestaurant() {
   const {
     id,
     name,
-
     address,
     phone,
     menu,
@@ -44,17 +61,31 @@ export default function DetailsRestaurant() {
 
           <p>Average rating: {averageRating}</p>
         </div>
-        <button onClick={()=>{setFormOpen(!formOpen)}} className="bg-rose-500 text-lime-200 p-2" >Add review</button>
+        <button
+         variant="contained" onClick={handleClick}
+          className="bg-rose-500 text-lime-200 p-2"
+        >
+          Add review
+        </button>
+        <Popover
+
+        id={"Review Form"}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <ReviewForm restId={id} closefunction={handleClose} />
+      </Popover>
       </div>
+      
       <div>
-        {
-          formOpen && <ReviewForm restId={id}/>
-        }
-      </div>
-      <div>
-        {
-          ratings.map(item=><ReviewCard data={item}/>)
-        }
+        {ratings.map((item) => (
+          <ReviewCard data={item} />
+        ))}
       </div>
     </div>
   );
