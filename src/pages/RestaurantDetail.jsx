@@ -47,7 +47,9 @@ export default function DetailsRestaurant() {
         <p className="text-xl font-bold ">FOOD <span className="text-4xl">.</span></p>
       <img title={loggedInUserData?.userName} src={loggedInUserData.profileAvatar} alt={loggedInUserData.userName}  className="w-12 hover:bg-sky-900 "/>
       </header>
-      <section className="m-auto w-1/2">
+      <section className=" flex m-auto w-3/4 items-center justify-between  py-2 border-b-4">
+         <div>
+       
           <header className="flex gap-2">
           <NavLink to="/">
             <ArrowBackIcon />
@@ -66,10 +68,11 @@ export default function DetailsRestaurant() {
 
           <p>Average rating: {averageRating}</p>
         </div>
-     
+        
+        </div>
         <button
          variant="contained" onClick={handleClick}
-          className="bg-rose-500 text-lime-200 p-2"
+          className="bg-rose-500 text-lime-200 p-2 rounded"
         >
           Add review
         </button>
