@@ -38,7 +38,7 @@ export default function Landing() {
       </div>
       </section>
       
-      <div className="flex flex-col w-screen">
+      <div className="flex flex-col gap-5 items-center py-4 w-screen">
         {cuisineDataToShow?.map((item) => (
           <Cuisines data={item} />
         ))}

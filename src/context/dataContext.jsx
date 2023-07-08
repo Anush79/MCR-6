@@ -16,6 +16,10 @@ export function DataProvider({ children }) {
 
   const AddReviewFunction = (e, reviewData, id) => {
     e.preventDefault();
+    if(reviewData.comment==="" || reviewData.rating ===""){
+      toast.error("Kindly fill all inputs")
+      return
+    }
     const foundRest = restaurantsDataCopy?.find((item) => item.id === id);
     foundRest?.ratings?.push(reviewData);
     setRestaurantData((prevData) =>
